@@ -10,6 +10,10 @@ const comment = new schema({
         type : String,
         required : true
     },
+    userAbout : {
+        type : String,
+        required : true
+    },
     commentDesc : {
         type : String,
         required : true
