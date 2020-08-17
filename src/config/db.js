@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 require('../model/user/userAccount');
 
 const { database_url} = require('./configuration');

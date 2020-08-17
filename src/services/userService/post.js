@@ -1,6 +1,6 @@
 const Post = require('../../model/user/post');
 const UserProfile = require('../../model/user/profile');
-const { request, response } = require('express');
+const Comment = require('../../model/user/comment');
 
 
 let service = {};
@@ -41,6 +41,26 @@ service.getNextPosts = async(request, response)=>{
             return response.status(200).json({success : true, posts : nextPosts});
         }
     })
+}
+
+service.deletePost = async (request, response)=>{
+    await Post.findByIdAndDelete({_id : request.params['postid']})
+    .then((deletedpost)=>{
+        if(deletedpost){
+            if(deletedpost.comments.length > 0) Comment.deleteMany({_id : {$in : deletedpost.comments}})
+            .then((deletedComments)=>{});
+            UserProfile.findByIdAndUpdate({_id : deletedpost.userid}, {$pull : {posts : deletedpost._id}})
+            .then((deletedpostfromuser)=>{
+                if(deletedpostfromuser){
+                    return response.status(200).json({success : true, message : 'Post Deleted'});
+                }else{
+                    return response.status(200).json({success : false, errorMessage : 'Post Deletion failed', deletedPost : deletedpost});
+
+                }
+            })
+        }
+    })
+    
 }
 
 module.exports = service;

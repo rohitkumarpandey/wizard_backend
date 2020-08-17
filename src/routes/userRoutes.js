@@ -42,6 +42,10 @@ routes.get('/getNextPosts/:lastpostid', (request, response)=>{
     return postService.getNextPosts(request, response);
 });
 
+routes.delete('/deletePost/:userid/:postid', (request, response)=>{
+    return postService.deletePost(request, response);
+});
+
 //add Comment
 routes.post('/addComment/:userid/:postid', (request, response)=>{
     return commentService.addComment(request, response);
