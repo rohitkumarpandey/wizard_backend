@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const userProfile = new schema({
+  
     about : {
         type : String,
         default : null

@@ -56,6 +56,18 @@ routes.post('/addComment/:userid/:postid', (request, response)=>{
 //     return 
 // })
 
+//upload profile pic
+routes.post('/uploadProfilePic/:userid', (request, response)=>{
+    return profileService.updateProfilePic(request, response);
+});
+
+//delete profile pic
+routes.delete('/deleteProfilePic/:userid', (request, response)=>{
+    
+    return profileService.deleteProfilePic(request, response);
+});
+
+
 
 module.exports = routes;
 
