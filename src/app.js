@@ -16,6 +16,9 @@ require('./config/db');
 
 
 const userRoutes = require('./routes/userRoutes');
+app.get('/pingServer', (request, response)=>{
+    return response.status(200).json({message : 'Connected to server'})
+})
 app.use('/user', userRoutes); 
 
 
