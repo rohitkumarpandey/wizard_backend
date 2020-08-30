@@ -26,6 +26,10 @@ const post = schema({
         type : Date,
         default : Date.now
     },
+    postPhoto : {
+        type : String,
+        default : null
+    },
     lastUpdatedAt : {
         type : Date,
         default : Date.now
