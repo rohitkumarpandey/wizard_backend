@@ -20,8 +20,20 @@ service.getShortProfile = async(request, response)=>{
     });
 }
 
+service.getUserLists = async(request, response)=>{
+    await UserProfile.find({}, {"username" : 1, "image": 1, "about" : 1})
+    .then((userProfileLists)=>{
+        if(userProfileLists){
+            return response.status(200).json({success : true , userLists : userProfileLists});
+        }else{
+            return response.status(200).json({success : false , errorMessage : 'Failed to fetch user lists'});
+
+        }
+    })
+}
+
 service.updateProfilePic = async(request, response)=>{
-    await UserProfile.findByIdAndUpdate({_id : request.params['userid']}, {profilePic : request.body.profilePic})
+    await UserProfile.findByIdAndUpdate({_id : request.params['userid']}, {image : request.body.image})
     .then((updated)=>{
         if(updated){
             
@@ -34,7 +46,7 @@ service.updateProfilePic = async(request, response)=>{
 }
 
 service.deleteProfilePic = async(request, response)=>{
-    await UserProfile.findByIdAndUpdate({_id : request.params['userid']}, {profilePic : null})
+    await UserProfile.findByIdAndUpdate({_id : request.params['userid']}, {image : null})
     .then((profilePicDeleted)=>{
         if(profilePicDeleted){
             

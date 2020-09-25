@@ -26,7 +26,7 @@ const post = schema({
         type : Date,
         default : Date.now
     },
-    postPhoto : {
+    image : {
         type : String,
         default : null
     },

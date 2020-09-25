@@ -5,6 +5,8 @@ const postService = require('../services/userService/post');
 const commentService = require('../services/userService/comment');
 const loginService = require('../services/userService/login');
 const profileService = require('../services/userService/profile');
+const { response } = require('express');
+const imageScale = require('../middleware/imageScailing');
 
 
 
@@ -24,13 +26,17 @@ routes.get('/getShortProfile/:userid', (request, response)=>{
     
     return profileService.getShortProfile(request, response);
 });
+
+routes.get('/userLists/:userid', (request, response)=>{
+    return profileService.getUserLists(request, response);
+})
 //get user details
 routes.get('/getProfile/:userid', (request, response)=>{
     
     return profileService.getProfile(request, response);
 });
 //create Post
-routes.post('/createPost/:userid', (request, response)=>{
+routes.post('/createPost/:userid', imageScale, (request, response)=>{
     return postService.createPost(request, response);
 });
 //get first 5 posts
@@ -57,7 +63,7 @@ routes.post('/addComment/:userid/:postid', (request, response)=>{
 // })
 
 //upload profile pic
-routes.post('/uploadProfilePic/:userid', (request, response)=>{
+routes.post('/uploadProfilePic/:userid', imageScale,(request, response)=>{
     return profileService.updateProfilePic(request, response);
 });
 

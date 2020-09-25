@@ -26,7 +26,7 @@ service.register = async(request, response)=>{
                 UserAccount.create({emailid : request.body.emailid, password : request.body.password, username : request.body.username})
                 .then((user)=>{
                     if(user){
-                        UserProfile.create({_id : user._id, about : request.body.about})
+                        UserProfile.create({_id : user._id, username : request.body.username,about : request.body.about})
                         .then((profile)=>{
                             if(profile){
                                 const payload = {

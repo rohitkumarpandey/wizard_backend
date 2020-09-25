@@ -10,10 +10,7 @@ const userAccount = new schema({
         type: String,
         required : true
     },
-    username : {
-        type:String,
-        required : true
-    },
+  
     accesibility : {
         type : Boolean,
         default : true
