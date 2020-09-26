@@ -9,7 +9,10 @@ const { response } = require('express');
 const imageScale = require('../middleware/imageScailing');
 
 
-
+//ping server
+routes.get('/pingServer', (request, response)=>{
+    return response.status(200).json({message : "Connected to server..."});
+})
 
 //login
 routes.post('/login', (request, response)=>{
